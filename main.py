@@ -53,28 +53,22 @@ def load_progress():
     return None
 
 files = [
-    ('title.akas.tsv', 'title_akas'),
-    ('title.basics.tsv', 'title_basics'),
-    ('title.crew.tsv', 'title_crew'),
-    ('title.ratings.tsv', 'title_ratings'),
-    ('title.episode.tsv', 'title_episodes'),
+   # ('title.akas.tsv', 'title_akas'),
+   # ('title.basics.tsv', 'title_basics'),
+   # ('title.crew.tsv', 'title_crew'),
+   # ('title.ratings.tsv', 'title_ratings'),
+   # ('title.episode.tsv', 'title_episodes'),
     ('name.basics.tsv', 'name_basics'),
-    ('title.principals.tsv', 'title_principals')
+   # ('title.principals.tsv', 'title_principals')
 ]
-
-# Dateien nach Dateigröße sortieren
-files_sorted_by_size = sorted(
-    files,
-    key=lambda x: os.path.getsize(os.path.join(data_folder, x[0]))
-)
 
 custom_dtypes = {
     'title.akas.tsv': {'types': 'object'},
-    'title.basics.tsv': {'runtimeMinutes': 'object', 'genres': 'object'},
+    'title.basics.tsv': {'runtimeMinutes': 'object', 'genres': 'object', 'startYear': 'float64', 'endYear': 'float64'},
     'title.crew.tsv': {'directors': 'object', 'writers': 'object'},
     'title.ratings.tsv': {'averageRating': 'float64', 'numVotes': 'int64'},
     'title.episode.tsv': {'seasonNumber': 'object', 'episodeNumber': 'object'},
-    'name.basics.tsv': {'primaryProfession': 'object', 'knownForTitles': 'object'},
+    'name.basics.tsv': {'birthYear': 'float64', 'deathYear': 'float64', 'primaryProfession': 'object', 'knownForTitles': 'object'},
     'title.principals.tsv': {'category': 'object', 'job': 'object', 'characters': 'object'}
 }
 
@@ -88,7 +82,7 @@ def import_batch_parallel(records, collection_name):
 
 progress = load_progress()
 
-for file_name, collection_name in files_sorted_by_size:
+for file_name, collection_name in files:
     try:
         if progress and progress['file_name'] == file_name:
             start_index = progress['last_index']
