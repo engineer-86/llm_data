@@ -3,3 +3,4 @@ pymongo==4.10.1
 tqdm==4.66.6
 dask==2024.10.0
 python-dotenv==1.0.1
+dask[dataframe]==2024.10.0
